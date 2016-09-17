@@ -1,4 +1,4 @@
-package br.com.mobiplus.webview_activity;
+package br.com.mobiplus.webviewactivity;
 
 import org.junit.Test;
 

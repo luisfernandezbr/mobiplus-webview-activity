@@ -1,4 +1,4 @@
-package br.com.mobiplus.webview_activity;
+package br.com.mobiplus.webviewactivity;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
