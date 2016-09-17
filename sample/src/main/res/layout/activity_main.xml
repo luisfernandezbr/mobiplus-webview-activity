@@ -11,8 +11,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.mobiplus.webviewactivity.sample.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:hint="@string/enter_the_url"
+        android:text="@string/test_url"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickOpenWebView"/>
 </RelativeLayout>

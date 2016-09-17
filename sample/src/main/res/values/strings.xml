@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mobiplus-webview-activity</string>
+    <string name="enter_the_url">Enter the URL</string>
+    <string name="test_url">http://www.google.com</string>
 </resources>

@@ -22,7 +22,7 @@ public class MPWebViewActivity extends AppCompatActivity {
         setContentView(R.layout.mp_activity_webview);
 
         String url = getIntent().getStringExtra(EXTRA_URL);
-        
+
         this.loadWebView(url);
     }
 
