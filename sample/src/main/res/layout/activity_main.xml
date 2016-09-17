@@ -12,12 +12,14 @@
     tools:context="br.com.mobiplus.webviewactivity.sample.MainActivity">
 
     <EditText
+        android:id="@+id/editWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_the_url"
         android:text="@string/test_url"/>
 
     <Button
+        android:layout_below="@+id/editWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClickOpenWebView"/>
