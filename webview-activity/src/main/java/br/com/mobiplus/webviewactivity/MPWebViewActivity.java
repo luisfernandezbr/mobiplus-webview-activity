@@ -8,6 +8,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -44,6 +45,7 @@ public class MPWebViewActivity extends AppCompatActivity {
         String url = getIntent().getStringExtra(EXTRA_URL);
 
         this.loadWebView(url);
+        this.showProgress();
     }
 
     private void loadWebView(String url) {
@@ -53,6 +55,7 @@ public class MPWebViewActivity extends AppCompatActivity {
         mWebView.setWebChromeClient(new WebChromeClient() {
 
             String mTitle = null;
+
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
@@ -80,11 +83,31 @@ public class MPWebViewActivity extends AppCompatActivity {
         });
     }
 
-    private void hideProgress() {
-        findViewById(R.id.progress).setVisibility(View.GONE);
+    private void showWebView() {
+        setViewVisibility(R.id.webview, View.VISIBLE);
+        setViewVisibility(R.id.buttonRetry, View.GONE);
+        setViewVisibility(R.id.progress, View.GONE);
+    }
+
+    private void showProgress() {
+        setViewVisibility(R.id.progress, View.VISIBLE);
+        setViewVisibility(R.id.buttonRetry, View.GONE);
+        setViewVisibility(R.id.webview, View.GONE);
+    }
+
+    private void showError() {
+        setViewVisibility(R.id.buttonRetry, View.VISIBLE);
+        setViewVisibility(R.id.webview, View.GONE);
+        setViewVisibility(R.id.progress, View.GONE);
+    }
+
+    private void setViewVisibility(@IdRes int resId, int viewState) {
+        findViewById(resId).setVisibility(viewState);
     }
 
     private class MyWebViewClient extends WebViewClient {
+
+        private boolean mWasLoadedWithSuccess = true;
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -96,8 +119,10 @@ public class MPWebViewActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             Log.d(TAG, "onPageFinished: url = " + url);
-            hideProgress();
-            view.setVisibility(View.VISIBLE);
+
+            if (this.mWasLoadedWithSuccess){
+                MPWebViewActivity.this.showWebView();
+            }
         }
 
         @Override
@@ -140,11 +165,21 @@ public class MPWebViewActivity extends AppCompatActivity {
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
+
+            this.handleOnLoadError();
+        }
+
+        private void handleOnLoadError() {
+            this.mWasLoadedWithSuccess = false;
+            MPWebViewActivity.this.showError();
         }
 
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             super.onReceivedError(view, request, error);
+
+            this.handleOnLoadError();
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 Log.d(TAG, "onReceivedError: error = " + error.getErrorCode() + ":" + error.getDescription());
             }
@@ -202,6 +237,12 @@ public class MPWebViewActivity extends AppCompatActivity {
         public void onReceivedLoginRequest(WebView view, String realm, String account, String args) {
             super.onReceivedLoginRequest(view, realm, account, args);
         }
+
+    }
+
+    public void onClickRetry(View view) {
+        this.showProgress();
+        this.loadWebView(getIntent().getStringExtra(EXTRA_URL));
     }
 
     @Override

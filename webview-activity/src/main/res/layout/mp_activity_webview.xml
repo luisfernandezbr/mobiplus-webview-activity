@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="br.com.mobiplus.webviewactivity.MPWebViewActivity"
+    android:animateLayoutChanges="true"
     >
 
 
     <WebView
         android:id="@+id/webview"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    />
-
+        android:visibility="gone"
+        />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -23,10 +23,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         tools:ignore="RtlHardcoded"/>
+
+    <Button
+        android:id="@+id/buttonRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClickRetry"
+        android:text="RETRY"/>
+
     <!--<android.support.v4.widget.ContentLoadingProgressBar-->
-        <!--style="pr"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"/>-->
+    <!--style="pr"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"/>-->
 
 </FrameLayout>
 
