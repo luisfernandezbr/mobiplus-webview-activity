@@ -22,5 +22,6 @@
         android:layout_below="@+id/editWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/click_to_load"
         android:onClick="onClickOpenWebView"/>
 </RelativeLayout>
