@@ -85,18 +85,18 @@ public class MPWebViewActivity extends AppCompatActivity {
 
     private void showWebView() {
         setViewVisibility(R.id.webview, View.VISIBLE);
-        setViewVisibility(R.id.buttonRetry, View.GONE);
+        setViewVisibility(R.id.linearError, View.GONE);
         setViewVisibility(R.id.progress, View.GONE);
     }
 
     private void showProgress() {
         setViewVisibility(R.id.progress, View.VISIBLE);
-        setViewVisibility(R.id.buttonRetry, View.GONE);
+        setViewVisibility(R.id.linearError, View.GONE);
         setViewVisibility(R.id.webview, View.GONE);
     }
 
     private void showError() {
-        setViewVisibility(R.id.buttonRetry, View.VISIBLE);
+        setViewVisibility(R.id.linearError, View.VISIBLE);
         setViewVisibility(R.id.webview, View.GONE);
         setViewVisibility(R.id.progress, View.GONE);
     }

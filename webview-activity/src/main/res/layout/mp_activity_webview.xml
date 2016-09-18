@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.mobiplus.webviewactivity.MPWebViewActivity"
     android:animateLayoutChanges="true"
+    tools:context="br.com.mobiplus.webviewactivity.MPWebViewActivity"
     >
-
 
     <WebView
         android:id="@+id/webview"
@@ -24,13 +23,29 @@
         android:layout_gravity="center"
         tools:ignore="RtlHardcoded"/>
 
-    <Button
-        android:id="@+id/buttonRetry"
+    <LinearLayout
+        android:id="@+id/linearError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:onClick="onClickRetry"
-        android:text="RETRY"/>
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/mpw_error_message_retry"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/buttonRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickRetry"
+            android:text="@string/mpw_button_retry"/>
+    </LinearLayout>
+
 
     <!--<android.support.v4.widget.ContentLoadingProgressBar-->
     <!--style="pr"-->
