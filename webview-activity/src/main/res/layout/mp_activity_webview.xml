@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WebView
-    android:id="@+id/webview"
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.mobiplus.webviewactivity.MPWebViewActivity">
+    tools:context="br.com.mobiplus.webviewactivity.MPWebViewActivity"
+    >
 
-</WebView>
+
+    <WebView
+        android:id="@+id/webview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    />
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:ignore="RtlHardcoded"/>
+    <!--<android.support.v4.widget.ContentLoadingProgressBar-->
+        <!--style="pr"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+</FrameLayout>
+
+

@@ -1,16 +1,22 @@
 package br.com.mobiplus.webviewactivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.ClientCertRequest;
 import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -20,6 +26,7 @@ import android.webkit.WebViewClient;
 public class MPWebViewActivity extends AppCompatActivity {
 
     private static final String EXTRA_URL = "EXTRA_URL";
+    private static final String TAG = "MobiPlusWebview";
 
     private WebView mWebView;
 
@@ -43,18 +50,54 @@ public class MPWebViewActivity extends AppCompatActivity {
         mWebView = (WebView) findViewById(R.id.webview);
         mWebView.loadUrl(url);
         mWebView.setWebViewClient(new MyWebViewClient());
+        mWebView.setWebChromeClient(new WebChromeClient() {
+
+            String mTitle = null;
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                Log.d(TAG, "onReceivedTitle: mTitle = " + title);
+
+                if (!TextUtils.isEmpty(title)) {
+                    this.mTitle = title;
+                }
+            }
+
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                Log.d(TAG, "onProgressChanged: newProgress = " + newProgress);
+
+                MPWebViewActivity.this.setTitle(String.format("Loading… %d %%", newProgress));
+                MPWebViewActivity.this.setProgress(newProgress * 100);
+
+                if (!TextUtils.isEmpty(this.mTitle)) {
+                    MPWebViewActivity.this.setTitle(this.mTitle);
+                }
+
+            }
+        });
     }
 
-    private static class MyWebViewClient extends WebViewClient {
+    private void hideProgress() {
+        findViewById(R.id.progress).setVisibility(View.GONE);
+    }
+
+    private class MyWebViewClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            //Log.d(TAG, "shouldOverrideUrlLoading: request.getUrl() = " + request.getUrl());
             return super.shouldOverrideUrlLoading(view, request);
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            Log.d(TAG, "onPageFinished: url = " + url);
+            hideProgress();
+            view.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -65,11 +108,13 @@ public class MPWebViewActivity extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            Log.d(TAG, "onPageStarted: url = " + url);
         }
 
         @Override
         public void onLoadResource(WebView view, String url) {
             super.onLoadResource(view, url);
+            Log.d(TAG, "onLoadResource: url = " + url);
         }
 
         @Override
@@ -100,11 +145,17 @@ public class MPWebViewActivity extends AppCompatActivity {
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             super.onReceivedError(view, request, error);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Log.d(TAG, "onReceivedError: error = " + error.getErrorCode() + ":" + error.getDescription());
+            }
         }
 
         @Override
         public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
             super.onReceivedHttpError(view, request, errorResponse);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Log.d(TAG, "onReceivedError: errorResponse.getStatusCode() = " + errorResponse.getStatusCode() );
+            }
         }
 
         @Override
