@@ -2,5 +2,6 @@
     <string name="app_name">mobiplus-webview-activity</string>
     <string name="enter_the_url">Enter the URL</string>
     <string name="test_url">http://www.google.com</string>
-    <string name="click_to_load">Click to Load</string>
+    <string name="click_to_load">OPEN IN WEBVIEW</string>
+    <string name="click_to_load_chrome_tab">OPEN IN CHROME CUSTOM TAB</string>
 </resources>
