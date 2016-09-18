@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">webview-activity</string>
-    <string name="mpw_error_message_retry">Ops. Ocorreu um erro, tente novamente!</string>
-    <string name="mpw_button_retry">RETRY</string>
+    <string name="mpw_app_name">webview-activity</string>
+    <string name="mpw_error_message_retry">Ops. Ocorreu um erro. Por favor, tente novamente!</string>
+    <string name="mpw_button_retry">TENTAR NOVAMENTE</string>
 </resources>

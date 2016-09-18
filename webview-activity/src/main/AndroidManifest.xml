@@ -3,13 +3,9 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    
-    <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true">
-        <activity android:name=".MPWebViewActivity">
-        </activity>
+
+    <application android:label="@string/mpw_app_name">
+        <activity android:name=".MPWebViewActivity"/>
     </application>
 
 </manifest>

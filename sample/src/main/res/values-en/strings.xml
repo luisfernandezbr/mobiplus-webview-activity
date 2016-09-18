@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="mpw_label_enter_the_url">Enter the URL</string>
+    <string name="mpw_button_click_to_load_webview">OPEN IN WEBVIEW</string>
+    <string name="mpw_button_click_to_load_chrome_tab">OPEN IN CHROME CUSTOM TAB</string>
+</resources>

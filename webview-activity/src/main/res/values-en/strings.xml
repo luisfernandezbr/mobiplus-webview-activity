@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mpw_error_message_retry">Ops. An error has occurred. Please retry!</string>
+    <string name="mpw_button_retry">RETRY</string>
+</resources>

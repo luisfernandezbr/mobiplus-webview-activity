@@ -16,18 +16,18 @@
         android:id="@+id/editWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_the_url"
+        android:hint="@string/mpw_label_enter_the_url"
         android:text="@string/test_url"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/click_to_load"
+        android:text="@string/mpw_button_click_to_load_webview"
         android:onClick="onClickOpenWebView"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/click_to_load_chrome_tab"
+        android:text="@string/mpw_button_click_to_load_chrome_tab"
         android:onClick="onClickOpenChromeCustomTab"/>
 </LinearLayout>
